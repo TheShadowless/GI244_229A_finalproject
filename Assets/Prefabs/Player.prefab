@@ -718,7 +718,7 @@ GameObject:
   - component: {fileID: 1501302734259142980}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -777,8 +777,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8aa7337a3eba8d45a61a233ca0c9511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 3
+  currentHP: 0
   jumpForce: 10
   gravityMultiplier: 2.75
+  isGameOver: 0
+  playerAnim: {fileID: 0}
+  jumpSfx: {fileID: 0}
+  crashSfx: {fileID: 0}
+  playerAudio: {fileID: 0}
+  explosionFx: {fileID: 0}
+  dirtFx: {fileID: 0}
+  playerPrefix: 
 --- !u!54 &1260100231012639333
 Rigidbody:
   m_ObjectHideFlags: 0

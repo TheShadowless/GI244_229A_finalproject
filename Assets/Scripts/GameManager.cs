@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         player1 = go1.GetComponent<PlayerController>();
 
         var go2 = GameObject.Find("Player2");
-        player2 = go1.GetComponent<PlayerController>();
+        player2 = go2.GetComponent<PlayerController>();
     }
 
     void Update()

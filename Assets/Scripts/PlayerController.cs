@@ -26,6 +26,12 @@ public class PlayerController : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction jumpAction;
 
+    private bool hasShield = false;
+    private float speedBoostTimer = 0f;
+    private float speedBoostDuration = 3f;
+    private float originalSpeed;
+    public float speedOffset = 0f;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -38,6 +44,7 @@ public class PlayerController : MonoBehaviour
         currentHP = maxHP;
         Physics.gravity *= gravityMultiplier;
         playerAnim.SetFloat("Speed_f", 1.0f);
+        originalSpeed = GameManager.Instance.gameSpeed;
     }
 
     void Update()
@@ -51,6 +58,15 @@ public class PlayerController : MonoBehaviour
             dirtFx.Stop();
         }
 
+        if (speedBoostTimer > 0f)
+        {
+            speedBoostTimer -= Time.deltaTime;
+            if (speedBoostTimer <= 0f)
+            {
+                speedOffset = 0f;
+            }
+        }
+
         if (isGameOver)
         {
             if (playerPrefix == "Player1")
@@ -62,11 +78,18 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("🎉 Player 1 wins!");
             }
             Time.timeScale = 0f;
-        }   
+        }
     }
 
     void TakeDamage(int damage)
     {
+        if (hasShield)
+        {
+            hasShield = false; // ใช้แล้วหมด
+            Debug.Log(playerPrefix + " blocked damage with shield!");
+            return;
+        }
+
         currentHP -= damage;
         if (currentHP <= 0 && !isGameOver)
         {
@@ -75,7 +98,6 @@ public class PlayerController : MonoBehaviour
             playerAudio.PlayOneShot(crashSfx);
             explosionFx.Play();
             dirtFx.Stop();
-            
         }
     }
 
@@ -100,10 +122,24 @@ public class PlayerController : MonoBehaviour
             Heal(1);
             Destroy(collision.gameObject);
         }
-
+        else if (collision.gameObject.CompareTag("SpeedBoost"))
+        {
+            speedBoostTimer = speedBoostDuration;
+            speedOffset = 5f; // เพิ่มเฉพาะคนนี้
+            Debug.Log(playerPrefix + " got Speed Boost!");
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("Shield"))
+        {
+            hasShield = true;
+            Debug.Log(playerPrefix + " picked up a Shield!");
+            Destroy(collision.gameObject);
+        }
     }
 
     public bool IsGameOver()
-    { return  isGameOver; }
+    { 
+        return  isGameOver; 
+    }
 }
 

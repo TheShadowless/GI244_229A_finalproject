@@ -14,8 +14,8 @@ public class MoveLeft : MonoBehaviour
     {
         if (!GameManager.Instance.player1.IsGameOver() && !GameManager.Instance.player2.IsGameOver())
         {
-            transform.Translate(Vector3.left * GameManager.Instance.gameSpeed * Time.deltaTime);
+            float boost = playerController != null ? playerController.speedOffset : 0f;
+            transform.Translate(Vector3.left * (speed + boost) * Time.deltaTime);
         }
     }
-
 }

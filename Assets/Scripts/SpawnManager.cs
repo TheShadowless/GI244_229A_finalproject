@@ -4,6 +4,11 @@ public class SpawnManager : MonoBehaviour
 {
     public Transform spawnPoint;
 
+    public GameObject speedBoostItemPrefab;
+    public GameObject shieldItemPrefab;
+    [Range(0f, 1f)] public float speedBoostChance = 0.1f;
+    [Range(0f, 1f)] public float shieldChance = 0.1f;
+
     public GameObject[] obstaclePrefabs;
     public GameObject healItemPrefab;
     [Range(0f, 1f)] public float healSpawnChance = 0.2f;
@@ -22,11 +27,15 @@ public class SpawnManager : MonoBehaviour
             float rand = Random.Range(0f, 1f);
 
             if (rand < healSpawnChance && healItemPrefab != null)
-            {                
+            {
                 Instantiate(healItemPrefab, spawnPoint.position, Quaternion.identity);
             }
+            else if (rand < healSpawnChance + speedBoostChance && speedBoostItemPrefab != null)
+            {
+                Instantiate(speedBoostItemPrefab, spawnPoint.position, Quaternion.identity);
+            }
             else if (obstaclePrefabs.Length > 0)
-            {                
+            {
                 int index = Random.Range(0, obstaclePrefabs.Length);
                 Instantiate(obstaclePrefabs[index], spawnPoint.position, Quaternion.identity);
             }
