@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage(1);
         }
-        else if (collision.gameObject.CompareTag("Obstacle"))
+        else if (collision.gameObject.CompareTag("HealItem"))
         {
             Heal(1);
             Destroy(collision.gameObject);

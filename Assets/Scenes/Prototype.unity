@@ -155,6 +155,10 @@ MonoBehaviour:
   - {fileID: 1691496851387953037, guid: d560de30436552840afd31c6a5a5cce6, type: 3}
   - {fileID: 1691496851387953037, guid: d560de30436552840afd31c6a5a5cce6, type: 3}
   - {fileID: 1691496851387953037, guid: d560de30436552840afd31c6a5a5cce6, type: 3}
+  - {fileID: 1691496851387953037, guid: d560de30436552840afd31c6a5a5cce6, type: 3}
+  healItemPrefab: {fileID: 6547624148481253948, guid: 8dd08e70f707c594fb9ecdc6eef461e9, type: 3}
+  healSpawnChance: 0.2
+  randTimeSpawn: 0
   playerController: {fileID: 1399345965}
 --- !u!4 &132895512
 Transform:
@@ -693,7 +697,7 @@ GameObject:
   m_Layer: 0
   m_Name: Camera_Player1
   m_TagString: MainCamera
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -881,7 +885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1399345966}
-  offset: {x: 3, y: 4, z: -15}
+  offset: {x: 3, y: 3, z: -10}
 --- !u!1 &835818919
 GameObject:
   m_ObjectHideFlags: 0
@@ -1160,7 +1164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -605, y: 355}
+  m_AnchoredPosition: {x: -595, y: 163}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &996432716
@@ -2344,6 +2348,10 @@ MonoBehaviour:
   - {fileID: 1691496851387953037, guid: d560de30436552840afd31c6a5a5cce6, type: 3}
   - {fileID: 1691496851387953037, guid: d560de30436552840afd31c6a5a5cce6, type: 3}
   - {fileID: 1691496851387953037, guid: d560de30436552840afd31c6a5a5cce6, type: 3}
+  - {fileID: 1691496851387953037, guid: d560de30436552840afd31c6a5a5cce6, type: 3}
+  healItemPrefab: {fileID: 6547624148481253948, guid: 8dd08e70f707c594fb9ecdc6eef461e9, type: 3}
+  healSpawnChance: 0.2
+  randTimeSpawn: 0.5
   playerController: {fileID: 304075736}
 --- !u!1 &2127402272
 GameObject:
@@ -2428,8 +2436,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898fa680bb15ffc42a6d4700e55b1da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  offset: {x: 0, y: 5, z: -10}
+  target: {fileID: 304075729}
+  offset: {x: 3, y: 3, z: -10}
 --- !u!82 &2127402275
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2661,6 +2669,10 @@ PrefabInstance:
       propertyPath: playerAudio
       value: 
       objectReference: {fileID: 1399345962}
+    - target: {fileID: 6959712263455451430, guid: f2132836654cce146ae0fd83d2dc2a2d, type: 3}
+      propertyPath: playerPrefix
+      value: Player1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
