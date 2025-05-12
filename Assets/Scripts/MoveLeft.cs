@@ -12,9 +12,10 @@ public class MoveLeft : MonoBehaviour
     }
     void Update()
     {
-        if (playerController.isGameOver == false)
-        { 
+        if (!GameManager.Instance.player1.IsGameOver() && !GameManager.Instance.player2.IsGameOver())
+        {
             transform.Translate(Vector3.left * GameManager.Instance.gameSpeed * Time.deltaTime);
         }
     }
+
 }
