@@ -4,9 +4,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public int maxHP = 3;
+    public int currentHP;
+
     public float jumpForce = 10f;
     public float gravityMultiplier = 1f;
+
     private Rigidbody rb;
+
     private bool isOnGround = true;
     public bool isGameOver = false;
 
@@ -30,6 +35,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        currentHP = maxHP;
         Physics.gravity *= gravityMultiplier;
         playerAnim.SetFloat("Speed_f", 1.0f);
     }
@@ -59,6 +65,25 @@ public class PlayerController : MonoBehaviour
         }   
     }
 
+    void TakeDamage(int damage)
+    {
+        currentHP -= damage;
+        if (currentHP <= 0 && !isGameOver)
+        {
+            isGameOver = true;
+            playerAnim.SetBool("Death_b", true);
+            playerAudio.PlayOneShot(crashSfx);
+            explosionFx.Play();
+            dirtFx.Stop();
+            
+        }
+    }
+
+    void Heal(int amount)
+    {
+        currentHP = Mathf.Min(currentHP + amount, maxHP);        
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -68,15 +93,13 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
-            isGameOver = true;
-            playerAnim.SetBool("Death_b", true);
-            playerAudio.PlayOneShot(crashSfx);
-            explosionFx.Play();
-            dirtFx.Stop();
-            
-
-        } 
-
+            TakeDamage(1);
+        }
+        else if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            Heal(1);
+            Destroy(collision.gameObject);
+        }
 
     }
 
