@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("🎉 Player 1 wins!");
             }
+            Time.timeScale = 0f;
         }   
     }
 
