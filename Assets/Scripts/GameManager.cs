@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public PlayerController player1;
     public PlayerController player2;
 
-    private bool gameEnded = false;
+    //private bool gameEnded = false;
     //private PlayerController playerController;
 
     void Awake()
@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
             gameSpeed += speedIncreaseRate * Time.deltaTime;
         }
 
+        /*
         if (!gameEnded)
         {
             if (player1.isGameOver)
@@ -49,11 +50,14 @@ public class GameManager : MonoBehaviour
                 gameEnded = true;
             }
         }
+        */
 
         
     }
+    /*
     public bool IsGameOver()
     {
         return player1.isGameOver || player2.isGameOver;
     }
+    */
 }
