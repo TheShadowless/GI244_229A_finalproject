@@ -49,5 +49,11 @@ public class GameManager : MonoBehaviour
                 gameEnded = true;
             }
         }
+
+        
+    }
+    public bool IsGameOver()
+    {
+        return player1.isGameOver || player2.isGameOver;
     }
 }

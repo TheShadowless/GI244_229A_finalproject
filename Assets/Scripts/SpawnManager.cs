@@ -1,21 +1,23 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
     public Transform spawnPoint;
     public GameObject[] obstaclePrefabs;
-    private PlayerController playerController;
+    public PlayerController playerController; 
 
     void Start()
     {
-        InvokeRepeating("Spawn", 2, 3);
-        var go = GameObject.Find("Player");
-        playerController = go.GetComponent<PlayerController>();
-        //Instantiate(obstaclePrefab, new Vector3(22, 0, 0), obstaclePrefab.transform.rotation);
-    }   
+        InvokeRepeating(nameof(Spawn), 2f, 3f);             
+    }
+
     void Spawn()
     {
-        if (playerController.isGameOver == false)
-        { Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)], spawnPoint.position, Quaternion.identity); }
+        if (playerController != null && playerController.isGameOver == false)
+        {
+            int index = Random.Range(0, obstaclePrefabs.Length);
+            Instantiate(obstaclePrefabs[index], spawnPoint.position, Quaternion.identity);
+        }
     }
 }
+
