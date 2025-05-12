@@ -7,8 +7,11 @@ public class GameManager : MonoBehaviour
     public float gameSpeed = 10f;
     public float speedIncreaseRate = 0.2f;
     public float maxSpeed = 25f;
+    public PlayerController player1;
+    public PlayerController player2;
 
-    private PlayerController playerController;
+    private bool gameEnded = false;
+    //private PlayerController playerController;
 
     void Awake()
     {
@@ -19,15 +22,32 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        var go = GameObject.Find("Player");
-        playerController = go.GetComponent<PlayerController>();
+        var go1 = GameObject.Find("Player1");
+        player1 = go1.GetComponent<PlayerController>();
+
+        var go2 = GameObject.Find("Player2");
+        player2 = go1.GetComponent<PlayerController>();
     }
 
     void Update()
     {
-        if (!playerController.isGameOver && gameSpeed < maxSpeed)
+        if (!player1.isGameOver && gameSpeed < maxSpeed && !player2.isGameOver)
         {
             gameSpeed += speedIncreaseRate * Time.deltaTime;
+        }
+
+        if (!gameEnded)
+        {
+            if (player1.isGameOver)
+            {
+                Debug.Log("🎉 Player 2 wins!");
+                gameEnded = true;
+            }
+            else if (player2.isGameOver)
+            {
+                Debug.Log("🎉 Player 1 wins!");
+                gameEnded = true;
+            }
         }
     }
 }
