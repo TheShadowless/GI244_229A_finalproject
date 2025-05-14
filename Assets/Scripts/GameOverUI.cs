@@ -7,15 +7,17 @@ public class GameOverUI : MonoBehaviour
     public GameObject gameOverPanel;
     public TMP_Text winnerText;
 
-    public void ShowWinner(string winner)
+    public void ShowWinner(string message)
     {
-        winnerText.text = winner;
+        Time.timeScale = 0f; 
         gameOverPanel.SetActive(true);
+        winnerText.text = message;
     }
 
-    public void BackToMenu()
+    public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu"); 
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 }
 

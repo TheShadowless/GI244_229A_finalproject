@@ -5,12 +5,12 @@ public class MainMenuUI : MonoBehaviour
 {
     public void PlayGame()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainGame"); 
     }
 
     public void ExitGame()
-    {
-        Debug.Log("Exit Game");
+    {       
         Application.Quit();
     }
 }

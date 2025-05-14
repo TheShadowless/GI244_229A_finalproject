@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        ResetPlayer();
         currentHP = maxHP;
         Physics.gravity *= gravityMultiplier;
         playerAnim.SetFloat("Speed_f", 1.0f);
@@ -72,8 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         if (hasShield)
         {
-            hasShield = false; 
-            Debug.Log(playerPrefix + " blocked damage with shield!");
+            hasShield = false;        
             return;
         }
 
@@ -128,6 +128,21 @@ public class PlayerController : MonoBehaviour
     public bool IsGameOver()
     { 
         return  isGameOver; 
+    }
+    private void ResetPlayer()
+    {
+        currentHP = maxHP;
+        isOnGround = true;
+        isGameOver = false;
+        speedOffset = 0f;
+        speedBoostTimer = 0f;
+        hasShield = false;
+
+        rb.linearVelocity = Vector3.zero; 
+        rb.angularVelocity = Vector3.zero;
+        Physics.gravity = new Vector3(0, -9.81f * gravityMultiplier, 0); 
+        playerAnim.SetFloat("Speed_f", 1.0f);
+        originalSpeed = GameManager.Instance.gameSpeed;
     }
 }
 
