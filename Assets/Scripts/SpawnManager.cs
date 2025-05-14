@@ -22,24 +22,37 @@ public class SpawnManager : MonoBehaviour
 
     void Spawn()
     {
-        if (playerController != null && playerController.isGameOver == false)
+        if (playerController != null && !playerController.isGameOver)
         {
+            GameObject objToSpawn = null;
+
             float rand = Random.Range(0f, 1f);
 
             if (rand < healSpawnChance && healItemPrefab != null)
             {
-                Instantiate(healItemPrefab, spawnPoint.position, Quaternion.identity);
+                objToSpawn = healItemPrefab;
             }
             else if (rand < healSpawnChance + speedBoostChance && speedBoostItemPrefab != null)
             {
-                Instantiate(speedBoostItemPrefab, spawnPoint.position, Quaternion.identity);
+                objToSpawn = speedBoostItemPrefab;
             }
             else if (obstaclePrefabs.Length > 0)
             {
                 int index = Random.Range(0, obstaclePrefabs.Length);
-                Instantiate(obstaclePrefabs[index], spawnPoint.position, Quaternion.identity);
+                objToSpawn = obstaclePrefabs[index];
+            }
+
+            if (objToSpawn != null)
+            {
+                GameObject spawned = Instantiate(objToSpawn, spawnPoint.position, Quaternion.identity);                               
+                MoveLeft move = spawned.GetComponent<MoveLeft>();
+                if (move != null)
+                {
+                    move.playerController = this.playerController;
+                }
             }
         }
     }
+
 }
 

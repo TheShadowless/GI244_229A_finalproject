@@ -9,10 +9,7 @@ public class GameManager : MonoBehaviour
     public float maxSpeed = 25f;
     public PlayerController player1;
     public PlayerController player2;
-
-    //private bool gameEnded = false;
-    //private PlayerController playerController;
-
+       
     void Awake()
     {
         //check GameManager ตัวเดียว
@@ -31,33 +28,21 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (!player1.isGameOver && gameSpeed < maxSpeed && !player2.isGameOver)
+        if ((!player1.isGameOver || !player2.isGameOver) && gameSpeed < maxSpeed)
         {
             gameSpeed += speedIncreaseRate * Time.deltaTime;
         }
 
-        /*
-        if (!gameEnded)
-        {
-            if (player1.isGameOver)
-            {
-                Debug.Log("🎉 Player 2 wins!");
-                gameEnded = true;
-            }
-            else if (player2.isGameOver)
-            {
-                Debug.Log("🎉 Player 1 wins!");
-                gameEnded = true;
-            }
-        }
-        */
+        PlayerWin();
 
-        
+
     }
-    /*
-    public bool IsGameOver()
+    public void PlayerWin()
     {
-        return player1.isGameOver || player2.isGameOver;
+        if (player1.isGameOver && !player2.isGameOver)
+            Debug.Log("🎉 Player 2 wins!");
+        else if (player2.isGameOver && !player1.isGameOver)
+            Debug.Log("🎉 Player 1 wins!");
     }
-    */
+   
 }

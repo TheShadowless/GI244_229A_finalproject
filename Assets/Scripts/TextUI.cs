@@ -12,11 +12,7 @@ public class TextUI : MonoBehaviour
     public float speed = 10f; 
     private float elapsedTime;
 
-    void Start()
-    {
-        
-    }
-
+    
     void Update()
     {
         if (player != null)

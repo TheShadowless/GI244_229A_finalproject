@@ -65,27 +65,14 @@ public class PlayerController : MonoBehaviour
             {
                 speedOffset = 0f;
             }
-        }
-
-        if (isGameOver)
-        {
-            if (playerPrefix == "Player1")
-            {
-                Debug.Log("🎉 Player 2 wins!");
-            }
-            else if (playerPrefix == "Player2")
-            {
-                Debug.Log("🎉 Player 1 wins!");
-            }
-            Time.timeScale = 0f;
-        }
+        }            
     }
 
     void TakeDamage(int damage)
     {
         if (hasShield)
         {
-            hasShield = false; // ใช้แล้วหมด
+            hasShield = false; 
             Debug.Log(playerPrefix + " blocked damage with shield!");
             return;
         }
@@ -99,6 +86,7 @@ public class PlayerController : MonoBehaviour
             explosionFx.Play();
             dirtFx.Stop();
         }
+                
     }
 
     void Heal(int amount)
@@ -108,33 +96,33 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        switch (collision.gameObject.tag)
         {
-            isOnGround = true;
-            dirtFx.Play();
-        }
-        else if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            TakeDamage(1);
-        }
-        else if (collision.gameObject.CompareTag("HealItem"))
-        {
-            Heal(1);
-            Destroy(collision.gameObject);
-        }
-        else if (collision.gameObject.CompareTag("SpeedBoost"))
-        {
-            speedBoostTimer = speedBoostDuration;
-            speedOffset = 5f; // เพิ่มเฉพาะคนนี้
-            Debug.Log(playerPrefix + " got Speed Boost!");
-            Destroy(collision.gameObject);
-        }
-        else if (collision.gameObject.CompareTag("Shield"))
-        {
-            hasShield = true;
-            Debug.Log(playerPrefix + " picked up a Shield!");
-            Destroy(collision.gameObject);
-        }
+            case "Ground":
+                isOnGround = true;
+                dirtFx.Play();
+                break;
+            case "Obstacle":
+                TakeDamage(1);
+                Destroy(collision.gameObject);
+                break;
+            case "HealItem":
+                Heal(1);
+                Destroy(collision.gameObject);
+                break;
+            case "SpeedBoost":
+                speedBoostTimer = speedBoostDuration;
+                speedOffset = 5f; 
+                Debug.Log(playerPrefix + " got Speed Boost!");
+                Destroy(collision.gameObject);
+                break;
+            case "Shield":
+                hasShield = true;
+                Debug.Log(playerPrefix + " picked up a Shield!");
+                Destroy(collision.gameObject);
+                break;
+        }   
+                        
     }
 
     public bool IsGameOver()
